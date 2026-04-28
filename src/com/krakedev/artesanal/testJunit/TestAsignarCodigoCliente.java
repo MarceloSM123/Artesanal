@@ -1,4 +1,4 @@
-package com.krakedev.artesanal.test;
+package com.krakedev.artesanal.testJunit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
