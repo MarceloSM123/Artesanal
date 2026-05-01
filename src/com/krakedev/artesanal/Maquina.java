@@ -11,6 +11,10 @@ public class Maquina {
 	
 	
 
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
 	public double getCantidadDesperdicio() {
 		return cantidadDesperdicio;
 	}
