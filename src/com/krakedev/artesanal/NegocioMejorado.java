@@ -99,5 +99,13 @@ public class NegocioMejorado {
 	private void registrarConsumo(Cliente cliente, double valor) {
 		cliente.setTotalConsumido(cliente.getTotalConsumido() + valor);
 	}
+	
+	public double consultarValorVendido() {
+        double totalVendido = 0;
+        for (int i = 0; i < clientes.size(); i++) {
+            totalVendido += clientes.get(i).getTotalConsumido();
+        }
+        return totalVendido;
+    }
 
 }
