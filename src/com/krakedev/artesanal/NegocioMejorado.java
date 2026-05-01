@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class NegocioMejorado {
 	private ArrayList<Maquina> maquinas;
 	private ArrayList<Cliente> clientes;
-	private int ultimoCodigo=100;
+	private int ultimoCodigo = 100;
 
 	public NegocioMejorado() {
-        maquinas = new ArrayList<Maquina>();
-        clientes = new ArrayList<Cliente>();
-    }
-	
+		maquinas = new ArrayList<Maquina>();
+		clientes = new ArrayList<Cliente>();
+	}
+
 	public ArrayList<Maquina> getMaquinas() {
 		return maquinas;
 	}
@@ -19,84 +19,85 @@ public class NegocioMejorado {
 	public void setMaquinas(ArrayList<Maquina> maquinas) {
 		this.maquinas = maquinas;
 	}
-	
+
 	public String generarCodigo() {
-        int numeroAleatorio = (int) (Math.random() * 100) + 1;
-        return "M-" + numeroAleatorio;
-    }
-	
+		int numeroAleatorio = (int) (Math.random() * 100) + 1;
+		return "M-" + numeroAleatorio;
+	}
+
 	public boolean agregarMaquina(String nombreCerveza, String descripcion, double precioPorMl) {
-        String codigo = generarCodigo();
-                   
-            Maquina existente = recuperarMaquina(codigo);
-            if (existente != null) {
-                return false; 
-            }
-            
-            Maquina nuevaMaquina = new Maquina(nombreCerveza, descripcion, precioPorMl);
-            nuevaMaquina.setCodigo(codigo);
-            maquinas.add(nuevaMaquina);
-            return true;
-        }
-    
-	
+		String codigo = generarCodigo();
+
+		Maquina existente = recuperarMaquina(codigo);
+		if (existente != null) {
+			return false;
+		}
+
+		Maquina nuevaMaquina = new Maquina(nombreCerveza, descripcion, precioPorMl);
+		nuevaMaquina.setCodigo(codigo);
+		maquinas.add(nuevaMaquina);
+		return true;
+	}
+
 	public void cargarMaquinas() {
-        for (int i = 0; i < maquinas.size(); i++) {
-            maquinas.get(i).llenarMaquina();
-        }
-    }
-	
+		for (int i = 0; i < maquinas.size(); i++) {
+			maquinas.get(i).llenarMaquina();
+		}
+	}
+
 	public Maquina recuperarMaquina(String codigo) {
-        for (int i = 0; i < maquinas.size(); i++) {
-            if (maquinas.get(i).getCodigo().equals(codigo)) {
-                return maquinas.get(i);
-            }
-        }
-        return null;
-    }
-	
+		for (int i = 0; i < maquinas.size(); i++) {
+			if (maquinas.get(i).getCodigo().equals(codigo)) {
+				return maquinas.get(i);
+			}
+		}
+		return null;
+	}
+
 	public void registrarCliente(String nombre, String cedula) {
-        Cliente nuevoCliente = new Cliente(nombre, cedula);
-        nuevoCliente.setCodigo(ultimoCodigo);
-        ultimoCodigo++;
-        clientes.add(nuevoCliente);
-    }
-	
+		Cliente nuevoCliente = new Cliente(nombre, cedula);
+		nuevoCliente.setCodigo(ultimoCodigo);
+		ultimoCodigo++;
+		clientes.add(nuevoCliente);
+	}
+
 	public Cliente buscarClientePorCedula(String cedula) {
-        for (int i = 0; i < clientes.size(); i++) {
-            if (clientes.get(i).getCedula().equals(cedula)) {
-                return clientes.get(i);
-            }
-        }
-        return null;
-    }
-	
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i).getCedula().equals(cedula)) {
+				return clientes.get(i);
+			}
+		}
+		return null;
+	}
+
 	public Cliente buscarClientePorCodigo(int codigo) {
-        for (int i = 0; i < clientes.size(); i++) {
-            if (clientes.get(i).getCodigo() == codigo) {
-                return clientes.get(i);
-            }
-        }
-        return null;
-    }
-	
-	 public double consumirCerveza(int codigoCliente, String codigoMaquina, double cantidad) {
-	        
-	        Maquina maquina = recuperarMaquina(codigoMaquina);
-	        if (maquina == null) {
-	            return -1; 
-	        }
-	        
-	        
-	        Cliente cliente = buscarClientePorCodigo(codigoCliente);
-	        if (cliente == null) {
-	            return -2; 
-	        }
-	        
-	        
-	        double valorConsumido = maquina.servirCerveza(cantidad);
-	        
-	        return valorConsumido;
-	    }
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i).getCodigo() == codigo) {
+				return clientes.get(i);
+			}
+		}
+		return null;
+	}
+
+	public double consumirCerveza(int codigoCliente, String codigoMaquina, double cantidad) {
+
+		Maquina maquina = recuperarMaquina(codigoMaquina);
+		if (maquina == null) {
+			return -1;
+		}
+
+		Cliente cliente = buscarClientePorCodigo(codigoCliente);
+		if (cliente == null) {
+			return -2;
+		}
+
+		double valorConsumido = maquina.servirCerveza(cantidad);
+
+		return valorConsumido;
+	}
+
+	private void registrarConsumo(Cliente cliente, double valor) {
+		cliente.setTotalConsumido(cliente.getTotalConsumido() + valor);
+	}
 
 }
