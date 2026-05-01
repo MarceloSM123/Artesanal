@@ -7,6 +7,17 @@ public class Maquina {
 	private double capacidadMaxima;
 	private double cantidadActual;
 	private String codigo;
+	private double cantidadDesperdicio;
+	
+	
+
+	public double getCantidadDesperdicio() {
+		return cantidadDesperdicio;
+	}
+
+	public void setCantidadDesperdicio(double cantidadDesperdicio) {
+		this.cantidadDesperdicio = cantidadDesperdicio;
+	}
 
 	public String getCodigo() {
 		return codigo;
@@ -97,6 +108,11 @@ public class Maquina {
 		} else {
 			return 0;
 		}
+	}
+	
+	public void vaciarMaquina() {
+		cantidadDesperdicio=cantidadActual;
+		cantidadActual=0;
 	}
 
 }
