@@ -9,7 +9,7 @@ public class NegocioMejorado {
 
 	public NegocioMejorado() {
         maquinas = new ArrayList<Maquina>();
-        
+        clientes = new ArrayList<Cliente>();
     }
 	
 	public ArrayList<Maquina> getMaquinas() {
