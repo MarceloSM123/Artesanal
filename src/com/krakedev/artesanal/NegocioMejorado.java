@@ -92,7 +92,7 @@ public class NegocioMejorado {
 		}
 
 		double valorConsumido = maquina.servirCerveza(cantidad);
-
+		registrarConsumo(cliente, valorConsumido);
 		return valorConsumido;
 	}
 
